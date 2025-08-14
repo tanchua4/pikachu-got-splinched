@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Confetti from 'react-confetti'
 import "./App.css";
 
@@ -42,9 +42,14 @@ function App() {
 
   return (
     <div className="App">
+      <div className="scrolling-title-container">
+        <div className="scrolling-title">
+          HARRY, PIKACHU GOT SPLINCHED ( ᗒᗣᗕ )
+        </div>
+      </div>
+      <div className="objective">Hurry! Guess the pokemon or Harry cant find whatever tf is in Hermione's bag!</div>
       {confettiActive && <Confetti gravity={0.4}/>}
       <button onClick={getNewPokemonClick}>Get Random Pokémon</button>
-
       {spriteUrl && (
         <div>
           <img

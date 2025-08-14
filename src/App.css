@@ -27,6 +27,40 @@
   color: white;
 }
 
+.scrolling-title-container {
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.scrolling-title {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 60px;
+  font-weight: bold;
+  color: #FFD700;
+  /* animation: scroll-title 10s linear infinite; */
+  animation: scroll-title 10s linear;
+  left: 100vw;
+}
+
+.objective {
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+@keyframes scroll-title {
+  0% {
+    left: 100vw;
+  }
+  100% {
+    left: -100vw;
+  }
+}
+
 .App-link {
   color: #61dafb;
 }
