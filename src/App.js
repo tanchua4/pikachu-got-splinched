@@ -14,7 +14,6 @@ function App() {
   const [pokemonData, setPokemonData] = useState(null);
   const [nameRevealed, setNameRevealed] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
-  const [isFakeFanClicked, setIsFakeFanClicked] = useState(false);
 
   const getRandomId = () => Math.floor(Math.random() * 100) + 1;
 
@@ -95,7 +94,7 @@ function App() {
           {!nameRevealed ? (
             <>
               <div
-                onClick={() => {setNameRevealed(true); setIsFakeFanClicked(false)}}
+                onClick={() => {setNameRevealed(true)}}
                 className="are-you-stupid-btn prompt-button button"
               >
                 ARE YOU STUPID?
@@ -113,8 +112,8 @@ function App() {
               <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>
                 LETS GOO
               </button>
-              <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} disabled={!nameRevealed} onClick={() => setIsFakeFanClicked(true)}>
-                {isFakeFanClicked && nameRevealed ? "🎂" : "FAKE FAN"}
+              <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} disabled={!nameRevealed}>
+                FAKE FAN
               </button>
             </div>
           </div>
