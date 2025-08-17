@@ -17,8 +17,16 @@ function App() {
     // State for fake fan overlay
   const [showFail, setShowFail] = useState(false);
 
-  // Image to show for FAKE FAN overlay
-  const fakeFanImgUrl = "https://media.tenor.com/gdzPqY7sP1AAAAAM/ishowspeed-ishowspeed-ballon-d%27or.gif"; // Replace with your own image if needed
+  // Array of media URLs for FAKE FAN overlay
+  const fakeFanMedia = [
+    "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycjJxYTUwZW1hNjhrbGFvaXFqOXNwcjg3dDVmdDhmdGE2bGp4bzM0YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT77XWum9yH7zNkFW0/giphy-downsized-medium.gif",
+    "https://i.pinimg.com/originals/49/6d/c7/496dc7f3371d10d07bb94e101fde11c7.gif",
+    "https://impeccabletablemanners.files.wordpress.com/2016/05/monkey-puppet-omg-shock-gif.gif",
+    "https://www.youtube.com/embed/IxX_QHay02M?si=7QB84C4z72TC3DDA&amp;start=28",
+  ];
+
+  // State for selected media
+  const [selectedMedia, setSelectedMedia] = useState(null);
 
   // Handler to close overlay
   const closeFakeFanOverlay = () => setShowFail(false);
@@ -123,7 +131,11 @@ function App() {
               <button
                 className={!nameRevealed ? 'disable-button button' : 'enable-button button'}
                 disabled={!nameRevealed}
-                onClick={() => setShowFail(true)}
+                onClick={() => {
+                  const idx = Math.floor(Math.random() * fakeFanMedia.length);
+                  setSelectedMedia(fakeFanMedia[idx]);
+                  setShowFail(true);
+                }}
               >
                 FAKE FAN
               </button>
@@ -131,11 +143,24 @@ function App() {
           </div>
         </div>
       )}
-      {showFail && (
-        <div className="fake-fan-overlay" onClick={closeFakeFanOverlay}>
-          <img src={fakeFanImgUrl} alt="Fake Fan" className="fake-fan-img" />
-        </div>
-      )}
+      {showFail && selectedMedia && (
+          <div className="fake-fan-overlay" onClick={closeFakeFanOverlay}>
+            {selectedMedia.includes('youtube.com/embed') ? (
+              <iframe
+                className="fake-fan-img"
+                src={selectedMedia}
+                title="YouTube video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : selectedMedia.endsWith('.mp4') ? (
+              <video src={selectedMedia} className="fake-fan-img" autoPlay loop muted />
+            ) : (
+              <img src={selectedMedia} alt="Fake Fan" className="fake-fan-img" />
+            )}
+          </div>
+        )}
     </div>
   );
 }
