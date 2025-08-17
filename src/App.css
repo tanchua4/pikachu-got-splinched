@@ -155,3 +155,5 @@ body, html, .App {
   justify-content: center;
   cursor: pointer;
 }
+
+/* Fix padding when in mobile view */
