@@ -78,7 +78,7 @@ function App() {
       </div>
       <div className="objective">Hurry! Guess the pokemon or Harry cant find whatever tf is in Hermione's bag!</div>
       {confettiActive && <Confetti gravity={0.4}/>}
-      <button className="button" onClick={getNewPokemonClick}>Get Random Pokémon</button>
+      <button className="prompt-button button" onClick={getNewPokemonClick}>Get Random Pokémon</button>
       {spriteUrl && (
         <div className="pokemon-and-timer">
           <img
@@ -96,7 +96,7 @@ function App() {
             <>
               <div
                 onClick={() => {setNameRevealed(true); setIsFakeFanClicked(false)}}
-                className="are-you-stupid-btn button"
+                className="are-you-stupid-btn prompt-button button"
               >
                 ARE YOU STUPID?
               </div>
@@ -110,10 +110,10 @@ function App() {
           )}
           <div className="pokemon-actions-container">
             <div className="pokemon-actions-row">
-              <button className={!nameRevealed ? 'disable-button' : 'button'} onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>
+              <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>
                 LETS GOO
               </button>
-              <button className={!nameRevealed ? 'disable-button' : 'button'} disabled={!nameRevealed} onClick={() => setIsFakeFanClicked(true)}>
+              <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} disabled={!nameRevealed} onClick={() => setIsFakeFanClicked(true)}>
                 {isFakeFanClicked && nameRevealed ? "🎂" : "FAKE FAN"}
               </button>
             </div>

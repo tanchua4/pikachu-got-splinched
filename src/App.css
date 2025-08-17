@@ -4,6 +4,10 @@ body, .App, .button, .disable-button {
   font-family: 'Cinzel Decorative', cursive, sans-serif;
 }
 
+body, html, .App {
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -16,7 +20,7 @@ body, .App, .button, .disable-button {
   overflow: hidden;
   position: relative;
   height: 100px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .scrolling-title {
@@ -26,13 +30,12 @@ body, .App, .button, .disable-button {
   font-weight: bold;
   color: #FFD700;
   /* animation: scroll-title 10s linear infinite; */
-  /* animation: scroll-title 10s linear; */
   left: 100vw;
 }
 
 .objective {
   font-size: 20px;
-  color: #fb514a;
+  color: #69488d;
   margin-bottom: 20px;
   margin: 20px 20px;
 }
@@ -86,17 +89,31 @@ body, .App, .button, .disable-button {
 }
 
 .button {
-  background-color: #bd0808;
-  border: #bd0808;
   color: white;
   border-radius: 5px;
   padding: 10px;
 }
 
+.prompt-button {
+  background-color: #bd0808;
+  border: #bd0808;
+}
+
 .disable-button {
   background-color: gray;
   border: gray;
-  color: white;
-  border-radius: 5px;
-  padding: 10px;
+}
+
+.enable-button {
+  background-color: #69488d;
+  border: #69488d;
+}
+
+@keyframes scroll-title {
+  0% {
+    left: 100vw;
+  }
+  100% {
+    left: -100vw;
+  }
 }
