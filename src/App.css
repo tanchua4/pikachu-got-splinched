@@ -1,30 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
+body, .App, .button, .disable-button {
+  font-family: 'Cinzel Decorative', cursive, sans-serif;
+}
+
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .scrolling-title-container {
@@ -42,38 +26,77 @@
   font-weight: bold;
   color: #FFD700;
   /* animation: scroll-title 10s linear infinite; */
-  animation: scroll-title 10s linear;
+  /* animation: scroll-title 10s linear; */
   left: 100vw;
 }
 
 .objective {
   font-size: 20px;
-  color: #ffffff;
+  color: #fb514a;
   margin-bottom: 20px;
+  margin: 20px 20px;
 }
 
-@keyframes scroll-title {
-  0% {
-    left: 100vw;
-  }
-  100% {
-    left: -100vw;
-  }
+.pokemon-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.are-you-stupid-btn {
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pokemon-name {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.pokemon-actions-container {
+  margin-top: 10px;
+}
+
+.pokemon-actions-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.timer {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-and-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokemon-img {
   width: 150px;
+  margin: 20px;
+}
+
+.button {
+  background-color: #bd0808;
+  border: #bd0808;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.disable-button {
+  background-color: gray;
+  border: gray;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Confetti from 'react-confetti'
 import "./App.css";
+import { render } from "@testing-library/react";
 
 function fetchAPI(param) {
   return fetch(`https://pokeapi.co/api/v2/pokemon/${param}`)
@@ -36,9 +37,37 @@ function App() {
     setConfettiActive(false);
   };
 
+  const renderTimer = () => (
+    <div className="timer">
+      <div>YOU HAVE: </div>
+      <div>{timer}</div>
+      <div>SECONDS LEFT!!!</div>
+    </div>
+  );
+
   const spriteUrl =
     pokemonId &&
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemonId}.gif`;
+
+  // Timer state
+  const [timer, setTimer] = useState(5);
+
+  useEffect(() => {
+    if (!nameRevealed && pokemonData) {
+      setTimer(10000);
+      const interval = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            setNameRevealed(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [pokemonData, nameRevealed]);
 
   return (
     <div className="App">
@@ -49,45 +78,45 @@ function App() {
       </div>
       <div className="objective">Hurry! Guess the pokemon or Harry cant find whatever tf is in Hermione's bag!</div>
       {confettiActive && <Confetti gravity={0.4}/>}
-      <button onClick={getNewPokemonClick}>Get Random Pokémon</button>
+      <button className="button" onClick={getNewPokemonClick}>Get Random Pokémon</button>
       {spriteUrl && (
-        <div>
+        <div className="pokemon-and-timer">
           <img
             src={spriteUrl}
             alt={`Pokémon ${pokemonId}`}
             draggable="false"
-            style={{ width: 150 }}
+            class="pokemon-img"
           />
         </div>
       )}
 
       {pokemonData && (
-        <div style={{ marginTop: "10px" }}>
-          {nameRevealed ? (
-            <h3 style={{ textTransform: "capitalize" }}>{pokemonData.name}</h3>
+  <div className="pokemon-info-container">
+          {!nameRevealed ? (
+            <>
+              <div
+                onClick={() => {setNameRevealed(true); setIsFakeFanClicked(false)}}
+                className="are-you-stupid-btn button"
+              >
+                ARE YOU STUPID?
+              </div>
+              {renderTimer()}
+            </>
           ) : (
-            <div
-              onClick={() => {setNameRevealed(true); setIsFakeFanClicked(false)}}
-              style={{
-                width: "150px",
-                padding: "10px",
-                backgroundColor: "#ccc",
-                cursor: "pointer",
-                textAlign: "center",
-                borderRadius: "5px",
-              }}
-            >
-              ARE YOU STUPID?
-            </div>
+            <>
+              <h3 className="pokemon-name">{pokemonData.name}</h3>
+              {renderTimer()}
+            </>
           )}
-          <div style={{ marginTop: "10px" }}>
-         
-          <div style={{display: "flex", gap:"20px"}}>
-          <button onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>LETS GOO</button>
-          <button disabled={!nameRevealed} onClick={() => setIsFakeFanClicked(true)}>
-            {isFakeFanClicked && nameRevealed ? "🎂" : "FAKE FAN"}
-          </button>
-          </div>
+          <div className="pokemon-actions-container">
+            <div className="pokemon-actions-row">
+              <button className={!nameRevealed ? 'disable-button' : 'button'} onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>
+                LETS GOO
+              </button>
+              <button className={!nameRevealed ? 'disable-button' : 'button'} disabled={!nameRevealed} onClick={() => setIsFakeFanClicked(true)}>
+                {isFakeFanClicked && nameRevealed ? "🎂" : "FAKE FAN"}
+              </button>
+            </div>
           </div>
         </div>
       )}
