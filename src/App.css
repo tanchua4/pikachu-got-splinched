@@ -33,6 +33,15 @@ body, html, .App {
   left: 100vw;
 }
 
+@keyframes scroll-title {
+  0% {
+    left: 100vw;
+  }
+  100% {
+    left: -100vw;
+  }
+}
+
 .objective {
   font-size: 20px;
   color: #69488d;
@@ -109,11 +118,40 @@ body, html, .App {
   border: #69488d;
 }
 
-@keyframes scroll-title {
+.fake-fan-img {
+  width: 40vw;
+  height: 40vh;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 40px #000;
+  animation: fakeFanZoom 4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes fakeFanZoom {
   0% {
-    left: 100vw;
+    transform: scale(0.2);
+    opacity: 0.5;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
   }
   100% {
-    left: -100vw;
+    transform: scale(1.05);
+    opacity: 1;
   }
+}
+
+.fake-fan-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

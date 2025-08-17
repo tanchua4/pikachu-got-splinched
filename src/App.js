@@ -14,6 +14,14 @@ function App() {
   const [pokemonData, setPokemonData] = useState(null);
   const [nameRevealed, setNameRevealed] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
+    // State for fake fan overlay
+  const [showFail, setShowFail] = useState(false);
+
+  // Image to show for FAKE FAN overlay
+  const fakeFanImgUrl = "https://media.tenor.com/gdzPqY7sP1AAAAAM/ishowspeed-ishowspeed-ballon-d%27or.gif"; // Replace with your own image if needed
+
+  // Handler to close overlay
+  const closeFakeFanOverlay = () => setShowFail(false);
 
   const getRandomId = () => Math.floor(Math.random() * 100) + 1;
 
@@ -112,11 +120,20 @@ function App() {
               <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>
                 LETS GOO
               </button>
-              <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} disabled={!nameRevealed}>
+              <button
+                className={!nameRevealed ? 'disable-button button' : 'enable-button button'}
+                disabled={!nameRevealed}
+                onClick={() => setShowFail(true)}
+              >
                 FAKE FAN
               </button>
             </div>
           </div>
+        </div>
+      )}
+      {showFail && (
+        <div className="fake-fan-overlay" onClick={closeFakeFanOverlay}>
+          <img src={fakeFanImgUrl} alt="Fake Fan" className="fake-fan-img" />
         </div>
       )}
     </div>
