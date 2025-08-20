@@ -20,7 +20,16 @@ function App() {
   const [letsGooDisabled, setLetsGooDisabled] = useState(false);
 
   const letsGooMedia = [
-    
+    "https://imgix.bustle.com/uploads/image/2023/6/1/bf7920f9-57f7-4e46-8178-c01670735df8-hayley-photo-by-julia-cox.jpg?w=374&h=285&fit=crop&crop=focalpoint&dpr=2&fp-x=0.516&fp-y=0.2347",
+    "/media/Brenda.jpg",
+    "/media/Cussing.png",
+    "https://www.youtube.com/embed/6cEidQxoXCw?si=y8W0QYNHpBgPY-i6",
+    "https://cdn.shopify.com/s/files/1/0613/0437/3481/articles/Ikura_sushi.jpg?v=1683722823",
+    "https://i.pinimg.com/originals/99/3c/50/993c50282188d047a89bcb30de3d70fe.gif",
+    "https://i.pinimg.com/originals/a2/b6/fe/a2b6fe0d7cdd2f1acf495cd57d3ba279.gif",
+    "/media/Jeff.jpg",
+    "https://media.tenor.com/vUE_peSWrrwAAAAM/pikahappy.gif",
+    "/media/Pantree.png"
   ]
 
   const fakeFanMedia = [
@@ -33,7 +42,7 @@ function App() {
     "https://www.youtube.com/embed/aKuAtXKgDEA?si=https://www.youtube.com/embed/aKuAtXKgDEA?si=Alj5iap7t1-pP6iA&amp;start=219",
     "https://growingnimblefamilies.com/wp-content/uploads/2016/05/take-out-the-trash-1.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxG9QsSSTQMBQk11Ru7Ghkb9EcsxT1mAkOw&s",
-    "https://media.istockphoto.com/id/1323033820/vector/cute-brown-smiling-cockroach-on-white-background.jpg?s=612x612&w=0&k=20&c=WLNHlI0GADzpPIkpI7hNR_jjzPVw7STSrsB42zVCl7w="
+    "/media/Jan.jpg"
   ];
 
   const closeFakeFanOverlay = () => setShowFail(false);
@@ -47,6 +56,8 @@ function App() {
       setNameRevealed(false);
     });
     setConfettiActive(false);
+    setLetsGooDisabled(false);
+    setFakeFanDisabled(false);
   };
 
   useEffect(() => {
