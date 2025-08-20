@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Confetti from 'react-confetti'
 import "./App.css";
-import { render } from "@testing-library/react";
 
 function fetchAPI(param) {
   return fetch(`https://pokeapi.co/api/v2/pokemon/${param}`)
@@ -9,39 +8,37 @@ function fetchAPI(param) {
     .then((data) => data);
 }
 
-function App() {
+function App() {  
   const [pokemonId, setPokemonId] = useState(null);
   const [pokemonData, setPokemonData] = useState(null);
   const [nameRevealed, setNameRevealed] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
-    // State for fake fan overlay
   const [showFail, setShowFail] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [fakeFanDisabled, setFakeFanDisabled] = useState(false);
+  const [letsGooDisabled, setLetsGooDisabled] = useState(false);
 
-  // Array of media URLs for FAKE FAN overlay
+  const letsGooMedia = [
+    
+  ]
+
   const fakeFanMedia = [
-    "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycjJxYTUwZW1hNjhrbGFvaXFqOXNwcjg3dDVmdDhmdGE2bGp4bzM0YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT77XWum9yH7zNkFW0/giphy-downsized-medium.gif",
-    "https://i.pinimg.com/originals/49/6d/c7/496dc7f3371d10d07bb94e101fde11c7.gif",
-    "https://impeccabletablemanners.files.wordpress.com/2016/05/monkey-puppet-omg-shock-gif.gif",
-    "https://www.youtube.com/embed/IxX_QHay02M?si=7QB84C4z72TC3DDA&amp;start=28",
+    "https://www.youtube.com/embed/plhFUXDqvaw?si=ixLFIedBv1_cs9bZ&amp;start=178",
+    "https://www.youtube.com/embed/jfr1Fzq2kUg?si=tjlJSxnASHqJkfOY",
+    "https://media.tenor.com/yB8qR6yw8p0AAAAM/pikaded.gif",
+    "https://www.bmisurgery.com/wp-content/uploads/2017/05/shutterstock_688185661-1024x717.jpg",
+    "https://sugarandsparrow.s3.us-west-2.amazonaws.com/flour/wp-content/uploads/2022/02/16214527/Best-Vanilla-Cake-Recipe-6.jpeg",
+    "https://www.youtube.com/embed/d522g3iHy1w?si=65tK-d_cG9F7mtDs",
+    "https://www.youtube.com/embed/aKuAtXKgDEA?si=https://www.youtube.com/embed/aKuAtXKgDEA?si=Alj5iap7t1-pP6iA&amp;start=219",
+    "https://growingnimblefamilies.com/wp-content/uploads/2016/05/take-out-the-trash-1.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxG9QsSSTQMBQk11Ru7Ghkb9EcsxT1mAkOw&s",
+    "https://media.istockphoto.com/id/1323033820/vector/cute-brown-smiling-cockroach-on-white-background.jpg?s=612x612&w=0&k=20&c=WLNHlI0GADzpPIkpI7hNR_jjzPVw7STSrsB42zVCl7w="
   ];
 
-  // State for selected media
-  const [selectedMedia, setSelectedMedia] = useState(null);
-
-  // Handler to close overlay
   const closeFakeFanOverlay = () => setShowFail(false);
-
-  const getRandomId = () => Math.floor(Math.random() * 100) + 1;
-
-  useEffect(() => {
-    const id = getRandomId();
-    setPokemonId(id);
-    fetchAPI(id).then((data) => {
-      setPokemonData(data);
-      setNameRevealed(false);
-    });
-  }, []);
-
+  const closePassOverlay = () => setShowPass(false);
+  const getRandomId = () => Math.floor(Math.random() * 1025) + 1;
   const getNewPokemonClick = () => {
     const id = getRandomId();
     setPokemonId(id);
@@ -52,24 +49,18 @@ function App() {
     setConfettiActive(false);
   };
 
-  const renderTimer = () => (
-    <div className="timer">
-      <div>YOU HAVE: </div>
-      <div>{timer}</div>
-      <div>SECONDS LEFT!!!</div>
-    </div>
-  );
-
-  const spriteUrl =
-    pokemonId &&
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemonId}.gif`;
-
-  // Timer state
-  const [timer, setTimer] = useState(5);
+  useEffect(() => {
+    const id = getRandomId();
+    setPokemonId(id);
+    fetchAPI(id).then((data) => {
+      setPokemonData(data);
+      setNameRevealed(false);
+    });
+  }, []);
 
   useEffect(() => {
     if (!nameRevealed && pokemonData) {
-      setTimer(10000);
+      setTimer(5);
       const interval = setInterval(() => {
         setTimer((prev) => {
           if (prev <= 1) {
@@ -83,6 +74,52 @@ function App() {
       return () => clearInterval(interval);
     }
   }, [pokemonData, nameRevealed]);
+
+  const spriteUrl =
+    pokemonData &&
+    pokemonData.sprites?.other?.['official-artwork']?.front_default;
+
+  const [timer, setTimer] = useState(5);
+
+  const renderFakeFanButton = () => (
+    <button
+      className={!nameRevealed || fakeFanDisabled ? 'disable-button button' : 'enable-button button'}
+      disabled={!nameRevealed || fakeFanDisabled}
+      onClick={() => {
+        const idx = Math.floor(Math.random() * fakeFanMedia.length);
+        setSelectedMedia(fakeFanMedia[idx]);
+        setShowFail(true);
+        setConfettiActive(false);
+        setLetsGooDisabled(true);
+      }}
+    >
+      FAKE FAN
+    </button>
+  );
+
+  const renderLetsGoButton = () => (
+    <button
+      className={!nameRevealed || letsGooDisabled ? 'disable-button button' : 'enable-button button'}
+      disabled={!nameRevealed || letsGooDisabled}
+      onClick={() => {
+        const idx = Math.floor(Math.random() * letsGooMedia.length);
+        setSelectedMedia(letsGooMedia[idx]);
+        setShowPass(true);
+        setConfettiActive(true);
+        setFakeFanDisabled(true);
+      }}
+    >
+      LETS GOO
+    </button>
+  );
+
+  const renderTimer = () => (
+    <div className="timer">
+      <div>YOU HAVE: </div>
+      <div>{timer}</div>
+      <div>SECONDS LEFT!!!</div>
+    </div>
+  );
 
   return (
     <div className="App">
@@ -106,7 +143,7 @@ function App() {
       )}
 
       {pokemonData && (
-  <div className="pokemon-info-container">
+      <div className="pokemon-info-container">
           {!nameRevealed ? (
             <>
               <div
@@ -125,42 +162,48 @@ function App() {
           )}
           <div className="pokemon-actions-container">
             <div className="pokemon-actions-row">
-              <button className={!nameRevealed ? 'disable-button button' : 'enable-button button'} onClick={() => setConfettiActive(true)} disabled={!nameRevealed}>
-                LETS GOO
-              </button>
-              <button
-                className={!nameRevealed ? 'disable-button button' : 'enable-button button'}
-                disabled={!nameRevealed}
-                onClick={() => {
-                  const idx = Math.floor(Math.random() * fakeFanMedia.length);
-                  setSelectedMedia(fakeFanMedia[idx]);
-                  setShowFail(true);
-                }}
-              >
-                FAKE FAN
-              </button>
+              {renderLetsGoButton()}
+              {renderFakeFanButton()}
             </div>
           </div>
         </div>
       )}
       {showFail && selectedMedia && (
-          <div className="fake-fan-overlay" onClick={closeFakeFanOverlay}>
-            {selectedMedia.includes('youtube.com/embed') ? (
-              <iframe
-                className="fake-fan-img"
-                src={selectedMedia}
-                title="YouTube video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : selectedMedia.endsWith('.mp4') ? (
-              <video src={selectedMedia} className="fake-fan-img" autoPlay loop muted />
-            ) : (
-              <img src={selectedMedia} alt="Fake Fan" className="fake-fan-img" />
-            )}
-          </div>
-        )}
+        <div className="fake-fan-overlay" onClick={closeFakeFanOverlay}>
+          {selectedMedia.includes('youtube.com/embed') ? (
+            <iframe
+              className="fake-fan-img"
+              src={selectedMedia}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : selectedMedia.endsWith('.mp4') ? (
+            <video src={selectedMedia} className="fake-fan-img" autoPlay loop muted />
+          ) : (
+            <img src={selectedMedia} alt="Fake Fan" className="fake-fan-img" />
+          )}
+        </div>
+      )}
+      {showPass && selectedMedia && (
+        <div className="fake-fan-overlay" onClick={closePassOverlay}>
+          {selectedMedia.includes('youtube.com/embed') ? (
+            <iframe
+              className="fake-fan-img"
+              src={selectedMedia}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : selectedMedia.endsWith('.mp4') ? (
+            <video src={selectedMedia} className="fake-fan-img" autoPlay loop muted />
+          ) : (
+            <img src={selectedMedia} alt="Fake Fan" className="fake-fan-img" />
+          )}
+        </div>
+      )}
     </div>
   );
 }
