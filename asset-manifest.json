@@ -1,15 +1,20 @@
 {
   "files": {
     "main.css": "/pikachu-got-splinched/static/css/main.d0e3c72b.css",
-    "main.js": "/pikachu-got-splinched/static/js/main.42f8c382.js",
+    "main.js": "/pikachu-got-splinched/static/js/main.4fb5c739.js",
     "static/js/453.4b33d57f.chunk.js": "/pikachu-got-splinched/static/js/453.4b33d57f.chunk.js",
+    "static/media/Jeff.jpg": "/pikachu-got-splinched/static/media/Jeff.d13361fa08f3c2c878ee.jpg",
+    "static/media/Cussing.png": "/pikachu-got-splinched/static/media/Cussing.2845ae9592c0fe25342f.png",
+    "static/media/Pantree.png": "/pikachu-got-splinched/static/media/Pantree.e976109eab2b4f2ff98f.png",
+    "static/media/Brenda.jpg": "/pikachu-got-splinched/static/media/Brenda.bf44bb2eb046559b417a.jpg",
+    "static/media/Jan.jpg": "/pikachu-got-splinched/static/media/Jan.1d5f250af38ab3ec3f55.jpg",
     "index.html": "/pikachu-got-splinched/index.html",
     "main.d0e3c72b.css.map": "/pikachu-got-splinched/static/css/main.d0e3c72b.css.map",
-    "main.42f8c382.js.map": "/pikachu-got-splinched/static/js/main.42f8c382.js.map",
+    "main.4fb5c739.js.map": "/pikachu-got-splinched/static/js/main.4fb5c739.js.map",
     "453.4b33d57f.chunk.js.map": "/pikachu-got-splinched/static/js/453.4b33d57f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d0e3c72b.css",
-    "static/js/main.42f8c382.js"
+    "static/js/main.4fb5c739.js"
   ]
 }
