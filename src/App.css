@@ -29,7 +29,7 @@ body, html, .App {
   font-size: 60px;
   font-weight: bold;
   color: #FFD700;
-  /* animation: scroll-title 10s linear infinite; */
+  animation: scroll-title 10s linear infinite;
   left: 100vw;
 }
 
